@@ -1,0 +1,52 @@
+.now-playing {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	padding: 1em;
+}
+
+@keyframes slide-up {
+	0% {
+		transform: translateY(100%)
+	}
+
+	100% {
+		transform: translateY(0);
+	}
+}
+
+.album-art {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	overflow: hidden;
+	animation: 0.3s ease-in-out 1 slide-up;
+}
+
+.album-art > * {
+	margin: 0.6em;
+}
+
+.album-art > .album-img {
+	width: 100%;
+	padding-bottom: 100%;
+	position: relative;
+	height: 0;
+	overflow: hidden;
+}
+
+.album-art > .album-img > img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+
+.info > span {
+	display: table;
+	color: #ffeeb7;
+	background-color: black;
+	padding: 0.4em;
+	text-transform: lowercase;
+	margin-bottom: 0.6em;
+}

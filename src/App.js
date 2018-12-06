@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import NowPlaying from './NowPlaying'
 
 class App extends Component {
 
@@ -24,11 +25,16 @@ class App extends Component {
 
   render() {
     return (
-      <div className={`app ${this.state.submitted ? 'move-up' : ''}`}>
+      <div className="app">
         <h1>genius.fm</h1>
         <form className="user-search" onSubmit={this.usernameSubmitted}>
           <input type="text" placeholder="your last.fm username" onChange={this.usernameChanged}></input>
         </form>
+        <div className={`container ${this.state.submitted ? 'move-up' : ''}`}>
+          {this.state.submitted && (
+            <NowPlaying />
+          )}
+        </div>
       </div>
     );
   }

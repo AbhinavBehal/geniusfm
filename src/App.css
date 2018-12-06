@@ -1,27 +1,39 @@
 .app {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   background-color: #ffeeb7;
   min-height: 100vh;
+  min-width: 100vw;
 }
 
-.move-up > .user-search {
-  flex: 1;
+.container {
+  align-self: flex-start;
+  transition: flex 0.3s ease-in-out;
+  flex: 0 0;
+  overflow: hidden;
+}
+
+.move-up {
+  flex: 1 1;
 }
 
 .app > h1 {
   text-align: center;
-  font-size: 3em;
+  display: block;
+  max-width: 100vw;
 }
 
 .user-search {
-  transition: flex 0.3s ease-in-out;
+  width: 80vw;
+  max-width: 300px;
 }
 
 .user-search > input[type=text] {
+  max-width: inherit;
+  width: inherit;
+  display: block;
   font-family: inherit;
   font-size: 1em;
   border: none;
