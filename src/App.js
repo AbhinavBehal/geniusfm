@@ -6,13 +6,29 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { value: '', submitted: false };
+    this.state = { value: '', submitted: false, track: null };
   }
 
   usernameSubmitted = (e) => {
-    this.setState({ submitted: true });
     console.log(this.state.value);
     e.preventDefault();
+    this.loadInfo();
+  }
+
+  loadInfo = async () => {
+    const response = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${this.state.value}&api_key=${process.env.REACT_APP_LAST_FM_API_KEY}&format=json`);
+    const json = await response.json();
+    const currTrack = json.recenttracks.track[0];
+    console.log(currTrack);
+    // todo: check if currently playing
+    const trackData = {
+      name: currTrack.name,
+      album: currTrack.album["#text"],
+      artist: currTrack.artist["#text"],
+      image: currTrack.image[currTrack.image.length - 1]["#text"]
+    };
+    console.log(trackData);
+    this.setState({ submitted: true, track: trackData });
   }
 
   usernameChanged = (e) => {
@@ -32,7 +48,7 @@ class App extends Component {
         </form>
         <div className={`container ${this.state.submitted ? 'move-up' : ''}`}>
           {this.state.submitted && (
-            <NowPlaying />
+            <NowPlaying track={this.state.track} />
           )}
         </div>
       </div>

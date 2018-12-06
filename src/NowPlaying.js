@@ -8,13 +8,12 @@ class NowPlaying extends Component {
 				<h2>now playing</h2>
 				<div className="album-art">
 					<div className="album-img">
-						<img alt="album art" src="https://upload.wikimedia.org/wikipedia/en/a/ae/Favourite_Worst_Nightmare.jpg"></img>
+						<img alt="album art" src={this.props.track.image}></img>
 					</div>
 					<div className="info">
-						<span><b>Old Yellow Bricks</b></span>
-						<span>by <b>Arctic Monkeys</b></span>
-						<span>on <b>Favorite Worst Nightmare</b></span>
-						<span><b>2007</b></span>
+						<span><b>{this.props.track.name}</b></span>
+						<span>by <b>{this.props.track.artist}</b></span>
+						<span>on <b>{this.props.track.album}</b></span>
 					</div>
 				</div>
 			</div >

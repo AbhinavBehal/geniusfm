@@ -5,6 +5,10 @@
 	padding: 1em;
 }
 
+.now-playing > h2 {
+	margin: 0.6em;
+}
+
 @keyframes slide-up {
 	0% {
 		transform: translateY(100%)
@@ -28,8 +32,8 @@
 }
 
 .album-art > .album-img {
-	width: 100%;
-	padding-bottom: 100%;
+	width: 300px;
+	padding-bottom: 300px;
 	position: relative;
 	height: 0;
 	overflow: hidden;
@@ -40,6 +44,10 @@
 	top: 0;
 	left: 0;
 	width: 100%;
+}
+
+.info {
+	max-width: 500px;
 }
 
 .info > span {
