@@ -6,6 +6,11 @@
   box-sizing: border-box;
 }
 
+*::selection {
+  color: #ffeeb7;
+  background: black;
+}
+
 html, body {
   min-height: 100vh;
 }

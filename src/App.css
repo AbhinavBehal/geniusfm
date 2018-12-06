@@ -8,9 +8,17 @@
   min-height: 100vh;
 }
 
+.move-up > .user-search {
+  flex: 1;
+}
+
 .app > h1 {
   text-align: center;
   font-size: 3em;
+}
+
+.user-search {
+  transition: flex 0.3s ease-in-out;
 }
 
 .user-search > input[type=text] {
