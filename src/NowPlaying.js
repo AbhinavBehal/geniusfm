@@ -11,9 +11,12 @@ class NowPlaying extends Component {
 						<img alt="album art" src={this.props.track.image}></img>
 					</div>
 					<div className="info">
-						<span><b>{this.props.track.name}</b></span>
+						<span><b>{this.props.track.title}</b></span>
 						<span>by <b>{this.props.track.artist}</b></span>
 						<span>on <b>{this.props.track.album}</b></span>
+					</div>
+					<div className="lyrics">
+						<span>{this.props.track.lyrics}</span>
 					</div>
 				</div>
 			</div >

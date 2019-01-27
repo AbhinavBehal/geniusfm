@@ -58,3 +58,13 @@
 	text-transform: lowercase;
 	margin-bottom: 0.6em;
 }
+
+.lyrics {
+	background-color: black;
+	color: #ffeeb7;
+	padding: 1em;
+}
+
+.lyrics > span {
+	white-space: pre-line;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import NowPlaying from './NowPlaying'
+import trackLoader from './trackLoader';
 
 class App extends Component {
 
@@ -16,19 +17,8 @@ class App extends Component {
   }
 
   loadInfo = async () => {
-    const response = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${this.state.value}&api_key=${process.env.REACT_APP_LAST_FM_API_KEY}&format=json`);
-    const json = await response.json();
-    const currTrack = json.recenttracks.track[0];
-    console.log(currTrack);
-    // todo: check if currently playing
-    const trackData = {
-      name: currTrack.name,
-      album: currTrack.album["#text"],
-      artist: currTrack.artist["#text"],
-      image: currTrack.image[currTrack.image.length - 1]["#text"]
-    };
-    console.log(trackData);
-    this.setState({ submitted: true, track: trackData });
+    const track = await trackLoader(this.state.value);
+    this.setState({ submitted: true, track: track });
   }
 
   usernameChanged = (e) => {
