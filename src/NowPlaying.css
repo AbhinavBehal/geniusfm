@@ -1,6 +1,6 @@
 .now-playing {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	flex-wrap: wrap;
 	padding: 1em;
 }
@@ -60,11 +60,6 @@
 }
 
 .lyrics {
-	background-color: black;
-	color: #ffeeb7;
-	padding: 1em;
-}
-
-.lyrics > span {
-	white-space: pre-line;
+	margin: 0.6em;
+	max-width: 800px;
 }

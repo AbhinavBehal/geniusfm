@@ -19,16 +19,17 @@ export async function loadInfo(username) {
     console.log('not currently playing anything');
     return;
   }
-  // get lyrics
+
   const genius = new Genius(process.env.REACT_APP_GENIUS_API_KEY);
   const song = await genius.song(currentTrack.name, currentTrack.artist["#text"]);
-  const referents = await genius.referents(song.id);
+  const referents = await genius.annotations(song.id, song.annotation_count);
+  // todo: sometimes track isn't on genius
+
   return {
     title: song.title,
     album: song.album.name,
     artist: song.primary_artist.name,
     image: currentTrack.image[currentTrack.image.length - 1]["#text"],
-    lyrics: song.lyrics,
     referents: referents
   };
 }
