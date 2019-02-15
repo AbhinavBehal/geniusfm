@@ -84,7 +84,17 @@ class Genius {
   }
 
   async referents(id, count) {
-    // todo: max per_page is 50, get error if larger
+    const maxCount = 50;
+    if (count > maxCount) {
+      const numPages = Math.ceil(count / maxCount);
+      const referents = [];
+      for (let page = 1; page <= numPages; ++page) {
+        const path = `referents?song_id=${id}&text_format=html&per_page=${maxCount}&page=${page}`
+        const refs = (await this.request(path)).referents;
+        referents.push(...refs);
+      }
+      return referents;
+    }
     const path = `referents?song_id=${id}&text_format=html&per_page=${count > 0 ? count : 1}`;
     return (await this.request(path)).referents;
   }

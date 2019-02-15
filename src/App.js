@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   loadInfo = async () => {
-    this.setState({ submitted: false, loading: true });
+    this.setState({ submitted: false, loading: true, error: null });
     try {
       const track = await trackLoader(this.state.username);
       track.lyrics = track.referents.map((r, index) => {
