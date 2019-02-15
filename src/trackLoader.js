@@ -31,7 +31,7 @@ export async function loadInfo(username) {
     title: song.title,
     album: song.album.name,
     artist: song.primary_artist.name,
-    image: currentTrack.image[currentTrack.image.length - 1]["#text"],
+    image: song.album.cover_art_url,
     referents: referents
   };
 }

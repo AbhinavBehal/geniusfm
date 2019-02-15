@@ -22,7 +22,9 @@ class Genius {
   }
 
   async song(title, artist) {
-    const searchPath = `search?q="${title} ${artist}"&per_page=1`;
+    const trimIndex = title.lastIndexOf('-');
+    const fixedTitle = title.slice(0, trimIndex > 0 ? trimIndex : title.length).trim();;
+    const searchPath = `search?q="${fixedTitle} ${artist}"&per_page=1`;
     const songPath = (await this.request(searchPath)).hits[0].result.api_path.slice(1);
     const { song } = await this.request(songPath);
 
@@ -41,22 +43,39 @@ class Genius {
     referents.forEach(r => {
       annotationMap.set('' + r.id, r.annotations[0].body.html)
     });
+    let currentLine = { lyrics: '', annotation: null };
+    const addLine = () => {
+      if (currentLine.lyrics.trim().length !== 0) {
+        components.push(currentLine);
+      }
+      currentLine = { lyrics: '', annotation: null };
+    };
     children.each(c => {
       const line = children[c];
-      if (line.type === 'text' && line.data.trim().length !== 0) {
-        components.push({ lyrics: line.data })
-      } else if (line.name === 'a') {
+      if (line.name === 'br') {
+        addLine();
+      } else if (line.type === 'text') {
+        currentLine.lyrics += line.data;
+      } else if (line.name === 'i' && line.children.length > 0 && line.children[0].type === 'text') {
+        currentLine.lyrics += line.children[0].data;
+      } else {
+        addLine();
         const $ = cheerio.load(line);
-        components.push({
-          lyrics: $('a').removeAttr('href target onclick').html(),
-          annotation: annotationMap.get(line.attribs['data-id'])
-        })
+        const link = $('a');
+        if (link.html()) {
+          components.push({
+            lyrics: link.removeAttr('href target onclick').html(),
+            annotation: annotationMap.get(link.attr('data-id'))
+          });
+        }
       }
     });
+    addLine();
     return components;
   }
 
   async referents(id, count) {
+    // todo: max per_page is 50, get error if larger
     const path = `referents?song_id=${id}&text_format=html&per_page=${count > 0 ? count : 1}`;
     return (await this.request(path)).referents;
   }
