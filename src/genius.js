@@ -41,7 +41,9 @@ class Genius {
     const referents = await this.referents(id, count);
     const annotationMap = new Map();
     referents.forEach(r => {
-      annotationMap.set('' + r.id, r.annotations[0].body.html)
+      annotationMap.set(
+        r.api_path.substr(r.api_path.lastIndexOf('/') + 1),
+        r.annotations[0].body.html)
     });
     let currentLine = { lyrics: '', annotation: null };
     const addLine = () => {
@@ -56,7 +58,10 @@ class Genius {
         addLine();
       } else if (line.type === 'text') {
         currentLine.lyrics += line.data;
-      } else if (line.name === 'i' && line.children.length > 0 && line.children[0].type === 'text') {
+      } else if (
+        line.name === 'i'
+        && line.children.length > 0
+        && line.children[0].type === 'text') {
         currentLine.lyrics += line.children[0].data;
       } else {
         addLine();
