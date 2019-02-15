@@ -25,7 +25,11 @@ class Genius {
     const trimIndex = title.lastIndexOf('-');
     const fixedTitle = title.slice(0, trimIndex > 0 ? trimIndex : title.length).trim();;
     const searchPath = `search?q="${fixedTitle} ${artist}"&per_page=1`;
-    const songPath = (await this.request(searchPath)).hits[0].result.api_path.slice(1);
+    const searchResults = (await this.request(searchPath)).hits;
+    if (!searchResults || searchResults.length === 0) {
+      return null;
+    }
+    const songPath = searchResults[0].result.api_path.slice(1);
     const { song } = await this.request(songPath);
 
     return song;
