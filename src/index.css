@@ -11,6 +11,10 @@
   background: black;
 }
 
+input:focus {
+  outline: none;
+}
+
 html, body {
   min-height: 100vh;
 }

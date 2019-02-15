@@ -50,6 +50,10 @@
   transform-origin: 0 50%;
 }
 
+.submitted::after {
+  transform: scaleX(1);
+}
+
 .user-search:focus-within::after {
   transform: scaleX(1);
 }

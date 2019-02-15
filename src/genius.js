@@ -22,7 +22,7 @@ class Genius {
   }
 
   async song(title, artist) {
-    const searchPath = `search?q="${title} - ${artist}"`;
+    const searchPath = `search?q="${title} ${artist}"&per_page=1`;
     const songPath = (await this.request(searchPath)).hits[0].result.api_path.slice(1);
     const { song } = await this.request(songPath);
 
@@ -30,7 +30,7 @@ class Genius {
   }
 
   async annotations(id, count) {
-    const url = `https://cors-anywhere.herokuapp.com/https://genius.com/songs/${id}/embed.js`
+    const url = `https://genius.com/songs/${id}/embed.js`
     const response = await fetch(url);
     const text = await response.text();
     const parsed = cheerio.load(eval(text.slice(text.indexOf('JSON.parse('), text.lastIndexOf('))') + 1)));
@@ -59,16 +59,6 @@ class Genius {
   async referents(id, count) {
     const path = `referents?song_id=${id}&text_format=html&per_page=${count > 0 ? count : 1}`;
     return (await this.request(path)).referents;
-  }
-
-  async scrapeLyrics(url) {
-    const completeUrl = `https://cors-anywhere.herokuapp.com/${url}`;
-    const response = await fetch(completeUrl);
-    const text = await response.text();
-    const parsed = cheerio.load(text);
-    return parsed('.lyrics')
-      .text()
-      .trim();
   }
 }
 

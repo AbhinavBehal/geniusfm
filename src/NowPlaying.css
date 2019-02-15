@@ -63,3 +63,11 @@
 	margin: 0.6em;
 	max-width: 800px;
 }
+
+.lyric::selection, .lyric > br::selection {
+	background: #ffeeb7;
+}
+
+.lyrics p::selection {
+	background: #ffeeb7;
+}
