@@ -57,3 +57,11 @@
 .user-search:focus-within::after {
   transform: scaleX(1);
 }
+
+.error {
+  background: black;
+  color: #ffeeb7;
+  margin-top: 1em;
+  padding: 0.2em;
+  font-size: 0.8em;
+}

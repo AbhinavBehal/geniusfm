@@ -14,18 +14,17 @@ export async function loadInfo(username) {
   );
   const json = await response.json();
   if (json && json.error) {
-    // couldn't find user or some other error
-    console.log(json.message);
-    return;
+    throw new Error('No one found with that username');
   }
   const currentTrack = json.recenttracks.track[0];
   if (!currentTrack["@attr"] || !currentTrack["@attr"].nowplaying) {
-    console.log('not currently playing anything');
-    return;
+    throw new Error('You\'re not currently playing anything');
   }
-  const song = await genius.song(currentTrack.name, currentTrack.artist["#text"]);
+  const song = await genius.song(currentTrack.name, currentTrack.artist['#text']);
+  if (song.primary_artist.name.trim() !== currentTrack.artist['#text'].trim()) {
+    throw new Error(`Couldn't find lyrics for ${currentTrack.name}`);
+  }
   const referents = await genius.annotations(song.id, song.annotation_count);
-  // todo: sometimes track isn't on genius
 
   return {
     title: song.title,

@@ -8,7 +8,13 @@ import trackLoader from './trackLoader';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { username: '', submitted: false, track: null, loading: false };
+    this.state = {
+      username: '',
+      submitted: false,
+      track: null,
+      loading: false,
+      error: null
+    };
   }
 
   usernameSubmitted = (e) => {
@@ -17,19 +23,20 @@ class App extends Component {
   }
 
   loadInfo = async () => {
-    this.setState({ loading: true });
-    const track = await trackLoader(this.state.username);
-    track.lyrics = track.referents.map((r, index) => {
-      return <Annotation key={index} lyrics={r.lyrics} annotation={r.annotation}></Annotation>
-    });
-    this.setState({ submitted: true, track: track, loading: false });
+    this.setState({ submitted: false, loading: true });
+    try {
+      const track = await trackLoader(this.state.username);
+      track.lyrics = track.referents.map((r, index) => {
+        return <Annotation key={index} lyrics={r.lyrics} annotation={r.annotation}></Annotation>
+      });
+      this.setState({ submitted: true, track: track, loading: false, error: null });
+    } catch (err) {
+      this.setState({ loading: false, error: err.message });
+    }
   }
 
   usernameChanged = (e) => {
-    this.setState({ username: e.target.value });
-    if (e.target.username === '') {
-      this.setState({ submitted: false });
-    }
+    this.setState({ username: e.target.value, error: null });
   }
 
   render() {
@@ -55,6 +62,11 @@ class App extends Component {
                 </input>
               </form>
             )
+        }
+        {
+          this.state.error && (
+            <p className="error">{this.state.error}</p>
+          )
         }
         <div className={`container ${this.state.submitted ? 'move-up' : ''}`}>
           {this.state.submitted && (
