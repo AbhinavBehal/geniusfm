@@ -17,7 +17,7 @@ export async function loadInfo(username) {
     throw new Error('No one found with that username');
   }
   const currentTrack = json.recenttracks.track[0];
-  if (!currentTrack["@attr"] || !currentTrack["@attr"].nowplaying) {
+  if (!currentTrack || !currentTrack["@attr"] || !currentTrack["@attr"].nowplaying) {
     throw new Error('You\'re not currently playing anything');
   }
   const song = await genius.song(currentTrack.name, currentTrack.artist['#text']);
