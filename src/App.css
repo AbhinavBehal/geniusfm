@@ -44,7 +44,7 @@
 .user-search::after {
   display: block;
   content: '';
-  border-bottom: solid 0.3em black;
+  border-bottom: solid 4px black;
   transition: transform 0.2s ease-in-out;
   transform: scaleX(0.4);
   transform-origin: 0 50%;

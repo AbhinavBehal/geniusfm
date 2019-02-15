@@ -3,7 +3,6 @@ import Genius from './genius';
 const genius = new Genius(process.env.REACT_APP_GENIUS_API_KEY);
 
 export async function loadInfo(username) {
-  console.time('last.fm recenttracks');
   const response = await fetch(
     'https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user='
     + username
@@ -24,13 +23,8 @@ export async function loadInfo(username) {
     console.log('not currently playing anything');
     return;
   }
-  console.timeEnd('last.fm recenttracks');
-  console.time('genius search song');
   const song = await genius.song(currentTrack.name, currentTrack.artist["#text"]);
-  console.timeEnd('genius search song');
-  console.time('genius get annotations');
   const referents = await genius.annotations(song.id, song.annotation_count);
-  console.timeEnd('genius get annotations');
   // todo: sometimes track isn't on genius
 
   return {
