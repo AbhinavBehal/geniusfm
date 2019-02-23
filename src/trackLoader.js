@@ -28,9 +28,9 @@ export async function loadInfo(username) {
 
   return {
     title: song.title,
-    album: song.album.name,
+    album: song.album ? song.album.name : null,
     artist: song.primary_artist.name,
-    image: song.album.cover_art_url,
+    image: song.album ? song.album.cover_art_url : song.header_image_url,
     referents: referents
   };
 }

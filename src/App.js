@@ -33,7 +33,6 @@ class App extends Component {
   loadInfo = async () => {
     this.setState({ submitted: false, loading: true, error: null });
     try {
-      console.log(this.state.username);
       const track = await trackLoader(this.state.username);
       track.lyrics = track.referents.map((r, index) => {
         return <Annotation key={index} lyrics={r.lyrics} annotation={r.annotation}></Annotation>
@@ -77,11 +76,9 @@ class App extends Component {
             <p className="error">{this.state.error}</p>
           )
         }
-        <div className={`container ${this.state.submitted ? 'move-up' : ''}`}>
-          {this.state.submitted && (
-            <NowPlaying track={this.state.track} />
-          )}
-        </div>
+        {this.state.submitted && (
+          <NowPlaying track={this.state.track} />
+        )}
       </div>
     );
   }

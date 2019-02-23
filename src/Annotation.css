@@ -13,9 +13,12 @@
 	max-width: 100%;
 	display: flex;
 	flex-flow: row wrap;
-	margin: 1em 0.8em 0.5em 8px;
-	border: 4px solid black;
+	border: 4px solid;
+	font-weight: 500;
 	padding: 0.5em;
+	color: #ffeeb7;
+	background-color: black;
+	margin: 8px 0.8em 0.5em 4px;
 }
 
 .details > * {
