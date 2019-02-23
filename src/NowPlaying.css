@@ -29,21 +29,19 @@
 
 .album-art > * {
 	margin: 0.6em;
+	width: 100%;
 }
 
 .album-art > .album-img {
-	width: 300px;
-	padding-bottom: 300px;
+	max-width: 400px;
+	width: 100%;
 	position: relative;
-	height: 0;
 	overflow: hidden;
 }
 
 .album-art > .album-img > img {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
+	max-width: 100%;
+	max-height: 100%;
 }
 
 .info {
@@ -65,9 +63,11 @@
 }
 
 .lyric::selection, .lyric > br::selection {
+	color: black;
 	background: #ffeeb7;
 }
 
 .lyrics p::selection {
+	color: black;
 	background: #ffeeb7;
 }

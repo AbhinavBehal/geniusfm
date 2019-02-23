@@ -1,9 +1,3 @@
-.annotation > * {
-	background-color: black;
-	color: #ffeeb7;
-	padding: 0.8em;
-}
-
 .annotation {
 	padding: 0.2em;
 	max-width: 600px;
@@ -12,13 +6,16 @@
 
 .lyric {
 	position: relative;
+	font-weight: bold;
 }
 
 .details {
 	max-width: 100%;
 	display: flex;
 	flex-flow: row wrap;
-	margin: 0.1em 0em 0.5em 0.8em;
+	margin: 1em 0.8em 0.5em 8px;
+	border: 4px solid black;
+	padding: 0.5em;
 }
 
 .details > * {
@@ -30,18 +27,10 @@
 .lyric-has-details {
 	cursor: pointer;
 	overflow: hidden;
-	font-weight: bold
-}
-
-.lyric-has-details::before {
-	position: absolute;
-	content: '';
-	display: inline-block;
-	width: 0.8em;
-	height: 0.8em;
-	left: 0;
-	bottom: 0;
-	background-color: #ffeeb7;
+	border: 4px solid black;
+	margin-bottom: 0.5em;
+	padding: 0.5em;
+	box-shadow: 8px 8px black;
 }
 
 .annotation img {
@@ -55,8 +44,9 @@
 }
 
 .annotation a {
-	color: black;
+	color: #ffeeb7;
 	text-decoration: none;
-	background-color: #ffeeb7;
+	background-color: black;
 	padding: 0 0.2em;
+	overflow-wrap: break-word;
 }
