@@ -17,14 +17,23 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    const username = localStorage.getItem('username');
+    if (username) {
+      this.setState({ username: username }, this.loadInfo);
+    }
+  }
+
   usernameSubmitted = (e) => {
     e.preventDefault();
+    localStorage.setItem('username', this.state.username);
     this.loadInfo();
   }
 
   loadInfo = async () => {
     this.setState({ submitted: false, loading: true, error: null });
     try {
+      console.log(this.state.username);
       const track = await trackLoader(this.state.username);
       track.lyrics = track.referents.map((r, index) => {
         return <Annotation key={index} lyrics={r.lyrics} annotation={r.annotation}></Annotation>
