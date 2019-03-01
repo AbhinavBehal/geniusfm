@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/geniusfm/precache-manifest.27b7f003938601f5efefddaf118da934.js"
+  "/geniusfm/precache-manifest.c7795bf04a11decb98a0fb8f394cb0dd.js"
 );
 
 workbox.clientsClaim();
