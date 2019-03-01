@@ -21,7 +21,7 @@ export async function loadInfo(username) {
     throw new Error('You\'re not currently playing anything');
   }
   const song = await genius.song(currentTrack.name, currentTrack.artist['#text']);
-  if (!song || song.primary_artist.name.trim() !== currentTrack.artist['#text'].trim()) {
+  if (!song || song.primary_artist.name.trim().toLowerCase() !== currentTrack.artist['#text'].trim().toLowerCase()) {
     throw new Error(`Couldn't find lyrics for ${currentTrack.name}`);
   }
   const referents = await genius.annotations(song.id, song.annotation_count);
