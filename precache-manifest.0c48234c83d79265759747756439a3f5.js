@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/geniusfm/static/css/main.6193dbeb.chunk.css"
   },
   {
-    "revision": "f28a9fe862a32b58efd4efcbb10f7f53",
+    "revision": "4a28c10d4f360c9021a9cdb13725a9ce",
     "url": "/geniusfm/index.html"
   }
 ];
